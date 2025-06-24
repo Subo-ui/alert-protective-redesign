@@ -1,0 +1,13 @@
+jQuery(window).scroll(function(){
+if(jQuery.fn.fitVids){jQuery('#main-content').fitVids({});}
+});
+setTimeout(function(){
+jQuery(window).trigger('load');
+jQuery('html').addClass('jsload');},600);
+setTimeout(function(){
+if(w3_menuclicked){
+	console.log(11111111);
+w3_menuclicked = 0;
+jQuery('.navbar-toggler').trigger('click');
+ }
+},1100);
