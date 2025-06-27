@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import ScrollFloat from './ScrollFloat';
 
 // Define the validation schema with Zod
 const schema = z.object({
@@ -27,15 +28,27 @@ const QuoteForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-        <div className="bg-white p-8 rounded-xl shadow-soft text-center">
+        <ScrollFloat 
+            animationDuration={1.2}
+            ease="back.out(1.7)"
+            y={60}
+            scale={true}
+            className="bg-white/40 backdrop-blur-lg p-8 rounded-xl shadow-soft text-center"
+        >
             <h2 className="text-3xl font-extrabold text-navy">Thank You!</h2>
             <p className="mt-4 text-lg text-gray-700">Your quote request has been sent. We will get back to you shortly.</p>
-        </div>
+        </ScrollFloat>
     );
   }
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-soft">
+    <ScrollFloat 
+        animationDuration={1.2}
+        ease="back.out(1.7)"
+        y={60}
+        scale={true}
+        className="bg-white/40 backdrop-blur-lg p-8 rounded-xl shadow-soft"
+    >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
@@ -70,7 +83,7 @@ const QuoteForm: React.FC = () => {
             </button>
             </div>
         </form>
-    </div>
+    </ScrollFloat>
   );
 };
 

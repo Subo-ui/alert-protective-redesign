@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default function Payment() {
   return (
-    <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
+    <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8 pt-32">
+      <div className="max-w-2xl mx-auto mt-16">
         {/* Payment Callout */}
         <div className="bg-white shadow rounded-lg p-6 mb-8 border border-gray-200">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Pay your bill online!</h1>

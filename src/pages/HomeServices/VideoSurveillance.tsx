@@ -2,6 +2,7 @@ import React from 'react';
 import { PhoneIcon, WifiIcon, CameraIcon, DevicePhoneMobileIcon, ShieldCheckIcon, CalendarDaysIcon, SparklesIcon, WrenchScrewdriverIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import videoSurveillanceImage from '../../assets/images/videosurveillancefamily.jpg';
+import ScrollFloat from '../../components/ScrollFloat';
 
 const technologies = [
   {
@@ -55,7 +56,7 @@ const processSteps = [
 
 const VideoSurveillance: React.FC = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-transparent">
       {/* Hero Section */}
       <div className="relative bg-cover bg-center h-96" style={{ backgroundImage: `url(${videoSurveillanceImage})` }}>
         <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -70,7 +71,7 @@ const VideoSurveillance: React.FC = () => {
       </div>
 
       {/* Intro Content Section */}
-      <div className="py-20 bg-gray-50">
+      <div className="py-20 bg-white/40 backdrop-blur-lg">
           <div className="container mx-auto px-6">
               <div className="max-w-4xl mx-auto text-center">
                   <h2 className="text-4xl font-bold text-gray-800 mb-6">The Ultimate Peace of Mind is Seeing for Yourself</h2>
@@ -87,38 +88,66 @@ const VideoSurveillance: React.FC = () => {
       {/* Technologies Section */}
       <div className="py-20">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
+          <ScrollFloat 
+              animationDuration={1.2}
+              ease="power2.out"
+              y={40}
+              className="text-center mb-12"
+          >
             <h2 className="text-4xl font-bold text-gray-800">The Latest in Surveillance Technology</h2>
             <p className="text-lg text-gray-600 mt-4">We install cutting-edge camera solutions tailored to your home's unique needs.</p>
-          </div>
+          </ScrollFloat>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {technologies.map((tech) => (
-              <div key={tech.name} className="flex">
+            {technologies.map((tech, index) => (
+              <ScrollFloat
+                key={tech.name}
+                animationDuration={1.2}
+                ease="back.out(1.7)"
+                y={60}
+                scale={true}
+                stagger={index * 0.1}
+                className="flex"
+              >
                 <tech.icon className="h-10 w-10 text-deep-red flex-shrink-0 mr-4 mt-1" />
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{tech.name}</h3>
                   <p className="text-gray-600">{tech.description}</p>
                 </div>
-              </div>
+              </ScrollFloat>
             ))}
           </div>
         </div>
       </div>
 
       {/* Process Section */}
-      <div className="bg-gray-50 py-20">
+      <div className="bg-white/40 backdrop-blur-lg py-20">
         <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
+            <ScrollFloat 
+                animationDuration={1.2}
+                ease="power2.out"
+                y={40}
+                className="text-center mb-12"
+            >
                 <h2 className="text-4xl font-bold text-gray-800">Our White-Glove Installation Process</h2>
                 <p className="text-lg text-gray-600 mt-4">We make upgrading your home simple and straightforward.</p>
-            </div>
+            </ScrollFloat>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {processSteps.map((item) => (
-                    <div key={item.step} className="bg-white p-6 rounded-lg shadow-md text-center">
+                {processSteps.map((item, index) => (
+                    <ScrollFloat
+                        key={item.step}
+                        animationDuration={1.2}
+                        ease="back.out(1.7)"
+                        y={60}
+                        scale={true}
+                        stagger={index * 0.1}
+                        className="bg-white/40 backdrop-blur-lg p-6 rounded-lg shadow-md text-center"
+                    >
                         <item.icon className="h-12 w-12 text-deep-red mx-auto mb-4"/>
                         <h3 className="text-lg font-bold text-gray-800 mb-2">{item.step}: {item.title}</h3>
                         <p className="text-gray-600 text-sm">{item.description}</p>
-                    </div>
+                    </ScrollFloat>
                 ))}
             </div>
         </div>

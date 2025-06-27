@@ -1,6 +1,7 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
+import ScrollFloat from './ScrollFloat';
 
 interface FeatureSectionProps {
     title: string;
@@ -29,16 +30,27 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
     const textOrder = imageSide === 'left' ? 'md:order-2' : 'md:order-1';
 
     return (
-        <section ref={ref} className="bg-gray-50 py-20">
+        <section ref={ref} className="bg-white/70 backdrop-blur-sm py-20">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     {/* Image Column */}
-                    <div className={`transition-all duration-700 ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} ${imageOrder}`}>
+                    <ScrollFloat 
+                        animationDuration={1.2}
+                        ease="power2.out"
+                        y={60}
+                        scale={true}
+                        className={`${imageOrder}`}
+                    >
                         <img src={imageUrl} alt={title} className="rounded-xl shadow-2xl w-full" />
-                    </div>
+                    </ScrollFloat>
 
                     {/* Text Column */}
-                    <div className={`transition-all duration-700 delay-100 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'} ${textOrder}`}>
+                    <ScrollFloat 
+                        animationDuration={1.2}
+                        ease="back.out(1.7)"
+                        y={40}
+                        className={`${textOrder}`}
+                    >
                         <h2 className="text-3xl font-extrabold text-navy sm:text-4xl">{title}</h2>
                         <p className="mt-6 text-lg text-gray-600">{description}</p>
                         <div className="mt-8 flex flex-wrap gap-4">
@@ -49,7 +61,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
                                 {secondaryActionText}
                             </Link>
                         </div>
-                    </div>
+                    </ScrollFloat>
                 </div>
             </div>
         </section>

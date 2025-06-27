@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import mainLogo from '../assets/images/logo-main.png';
 import { ShieldCheckIcon, PhoneIcon, WrenchScrewdriverIcon, ChevronDownIcon, ComputerDesktopIcon, HomeIcon, VideoCameraIcon, BellAlertIcon, Squares2X2Icon, BuildingOffice2Icon, FireIcon, KeyIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
@@ -52,6 +52,27 @@ const NavLink = ({ children, dropdownItems, align = 'center' }: NavLinkProps) =>
 
 const Header: React.FC = () => {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
+    const [showHeader, setShowHeader] = useState(true);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        lastScrollY.current = window.scrollY;
+        const handleScroll = () => {
+            if (window.scrollY < 50) {
+                setShowHeader(true);
+                lastScrollY.current = window.scrollY;
+                return;
+            }
+            if (window.scrollY > lastScrollY.current) {
+                setShowHeader(false); // scrolling down
+            } else {
+                setShowHeader(true); // scrolling up
+            }
+            lastScrollY.current = window.scrollY;
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const homeServices: NavItem[] = [
         { name: 'Alarm System', icon: ComputerDesktopIcon, link: '/home-services/alarm-system' },
@@ -79,7 +100,7 @@ const Header: React.FC = () => {
     ];
 
     return (
-        <header className="bg-white shadow-soft sticky top-0 z-50">
+        <header className={`bg-white shadow-soft z-50 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'} fixed w-full left-0 top-0`}>
             <div className="container mx-auto px-4 sm:px-6">
                 {/* Top Section */}
                 <div className="flex flex-col sm:flex-row justify-between items-center py-2 gap-2 sm:gap-0">
@@ -123,9 +144,9 @@ const Header: React.FC = () => {
                 {/* Bottom Navigation Section */}
                 <div className="hidden sm:flex justify-between items-center border-t border-gray-200 mt-2">
                     <div className="flex items-center space-x-8 font-medium text-gray-700">
-                        <NavLink dropdownItems={homeServices} align="left">Home Services</NavLink>
-                        <NavLink dropdownItems={commercialServices}>Commercial Services</NavLink>
-                        <NavLink dropdownItems={resources}>Resources</NavLink>
+                        <NavLink dropdownItems={homeServices} align="left"><Link to="/">Home Services</Link></NavLink>
+                        <NavLink dropdownItems={commercialServices}><Link to="/commercial-services/alarm-system">Commercial Services</Link></NavLink>
+                        <NavLink dropdownItems={resources}><Link to="/about-us">Resources</Link></NavLink>
                     </div>
                     <div className="flex items-center space-x-4">
                         <Link to="/payment" className="text-gray-600 hover:text-deep-red font-medium px-4 py-2 rounded-md bg-gray-100">Make A Payment</Link>

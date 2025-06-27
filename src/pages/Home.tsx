@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import commercialImage from '../assets/images/commercial security.jpg';
 import homeImage from '../assets/images/home security.jpg';
+import { AuroraBackground } from '../components/AuroraBackground';
 
 interface HeroCardProps {
     title: string;
@@ -46,53 +47,59 @@ const HeroCard = ({ title, description, imageUrl, link, productsLink }: HeroCard
 }
 
 const Home: React.FC = () => {
-
   return (
-    <main>
-      <section className="flex flex-col md:flex-row">
-        <HeroCard 
-            title="Commercial Security"
-            description="Protecting your Business"
-            imageUrl={commercialImage}
-            link="#"
-            productsLink="#"
+    <div className="relative min-h-screen w-full overflow-x-hidden">
+      {/* Aurora background as a layer */}
+      <div className="absolute inset-0 -z-10">
+        <AuroraBackground>{null}</AuroraBackground>
+      </div>
+      {/* Main content above the background */}
+      <main className="relative z-10 w-full">
+        <section className="flex flex-col md:flex-row">
+          <HeroCard 
+              title="Commercial Security"
+              description="Protecting your Business"
+              imageUrl={commercialImage}
+              link="#"
+              productsLink="#"
+          />
+          <HeroCard 
+              title="Home Security"
+              description="Protect your home & everything in it"
+              imageUrl={homeImage}
+              link="#"
+              productsLink="#"
+          />
+        </section>
+        <Reviews />
+        <Testimonials />
+        <Comparison />
+        <FeatureSection 
+          title="Alarm Systems"
+          description="From basic setups to the most advanced smart systems, we provide comprehensive alarm solutions to keep you safe. Our systems are designed to detect intrusion, fire, and environmental hazards, ensuring a rapid response when it matters most."
+          imageUrl="https://placehold.co/1200x800/e2e8f0/4a5568?text=Alarm+Systems"
+          imageSide="left"
+          primaryActionText="See Details"
+          primaryActionLink="/services"
+          secondaryActionText="Learn More"
+          secondaryActionLink="/contact"
         />
-        <HeroCard 
-            title="Home Security"
-            description="Protect your home & everything in it"
-            imageUrl={homeImage}
-            link="#"
-            productsLink="#"
+        <FeatureSection 
+          title="24/7 Central Station Monitoring"
+          description="Our five-diamond certified central station is always alert, providing immediate response to any alarm signal. With redundant power and communication, we ensure uninterrupted monitoring for your home or business, giving you true peace of mind."
+          imageUrl="https://placehold.co/1200x800/e2e8f0/4a5568?text=24/7+Monitoring"
+          imageSide="right"
+          primaryActionText="See Details"
+          primaryActionLink="/services"
+          secondaryActionText="Learn More"
+          secondaryActionLink="/contact"
         />
-      </section>
-      <Reviews />
-      <Testimonials />
-      <Comparison />
-      <FeatureSection 
-        title="Alarm Systems"
-        description="From basic setups to the most advanced smart systems, we provide comprehensive alarm solutions to keep you safe. Our systems are designed to detect intrusion, fire, and environmental hazards, ensuring a rapid response when it matters most."
-        imageUrl="https://placehold.co/1200x800/e2e8f0/4a5568?text=Alarm+Systems"
-        imageSide="left"
-        primaryActionText="See Details"
-        primaryActionLink="/services"
-        secondaryActionText="Learn More"
-        secondaryActionLink="/contact"
-      />
-      <FeatureSection 
-        title="24/7 Central Station Monitoring"
-        description="Our five-diamond certified central station is always alert, providing immediate response to any alarm signal. With redundant power and communication, we ensure uninterrupted monitoring for your home or business, giving you true peace of mind."
-        imageUrl="https://placehold.co/1200x800/e2e8f0/4a5568?text=24/7+Monitoring"
-        imageSide="right"
-        primaryActionText="See Details"
-        primaryActionLink="/services"
-        secondaryActionText="Learn More"
-        secondaryActionLink="/contact"
-      />
-      <IconFeatureGrid />
-      <CtaBanner />
-      <NewsletterSignup />
-      <HomeQuoteSection />
-    </main>
+        <IconFeatureGrid />
+        <CtaBanner />
+        <NewsletterSignup />
+        <HomeQuoteSection />
+      </main>
+    </div>
   );
 };
 

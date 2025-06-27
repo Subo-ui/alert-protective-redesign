@@ -1,5 +1,6 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import ScrollFloat from './ScrollFloat';
 
 const NewsletterSignup: React.FC = () => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -11,8 +12,13 @@ const NewsletterSignup: React.FC = () => {
     };
 
     return (
-        <section ref={ref} className="bg-gray-50 py-20">
-            <div className={`container mx-auto px-6 max-w-xl text-center transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <section ref={ref} className="bg-white/70 backdrop-blur-sm py-20">
+            <ScrollFloat 
+                animationDuration={1.2}
+                ease="power2.out"
+                y={40}
+                className="container mx-auto px-6 max-w-xl text-center"
+            >
                 <h2 className="text-3xl font-extrabold text-navy sm:text-4xl">Stay In The Know</h2>
                 <p className="mt-4 text-lg text-gray-600">
                     Sign up for our newsletter to get the latest security tips, product updates, and exclusive offers delivered straight to your inbox.
@@ -31,7 +37,7 @@ const NewsletterSignup: React.FC = () => {
                         Sign Up
                     </button>
                 </form>
-            </div>
+            </ScrollFloat>
         </section>
     );
 };

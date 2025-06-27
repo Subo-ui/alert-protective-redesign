@@ -20,15 +20,21 @@ import Footer from './components/Footer';
 import BottomChatWidget from './components/BottomChatWidget';
 import ScrollToTop from './components/utils/ScrollToTop';
 import AboutUs from './pages/About';
+import AuroraTest from './components/AuroraTest';
+import { AuroraBackground } from './components/AuroraBackground';
 // import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="bg-white font-sans flex flex-col min-h-screen">
+      <div className="relative font-sans flex flex-col min-h-screen overflow-x-hidden">
+        {/* Aurora background as a global layer */}
+        <div className="absolute inset-0 -z-10">
+          <AuroraBackground>{null}</AuroraBackground>
+        </div>
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow pt-28">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
@@ -45,6 +51,7 @@ const App: React.FC = () => {
             <Route path="/commercial-services/access-control" element={<AccessControl />} />
             <Route path="/commercial-services/alarm-monitoring" element={<CommercialAlarmMonitoring />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/test-aurora" element={<AuroraTest />} />
           </Routes>
         </main>
         <SideNav />

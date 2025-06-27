@@ -32,7 +32,7 @@ const AlarmSystem: React.FC = () => {
   ]
 
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-transparent text-gray-800">
       {/* Hero Section */}
       <div className="relative bg-cover bg-center h-96 md:h-[32rem] lg:h-[40rem]" style={{ backgroundImage: `url(${alarmSystemImage})` }}>
         <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -95,7 +95,7 @@ const AlarmSystem: React.FC = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {processSteps.map((item) => (
-                      <div key={item.step} className="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                      <div key={item.step} className="bg-white/40 backdrop-blur-lg p-6 rounded-lg shadow-md text-center">
                           <item.icon className="h-12 w-12 text-deep-red mx-auto mb-4"/>
                           <h3 className="text-lg font-bold text-gray-800 mb-2">{item.step}: {item.title}</h3>
                           <p className="text-gray-600 text-sm">{item.description}</p>
@@ -104,7 +104,7 @@ const AlarmSystem: React.FC = () => {
               </div>
             </div>
 
-            <div className="text-center bg-gray-100 p-8 rounded-lg shadow-md mt-12">
+            <div className="text-center bg-white/40 backdrop-blur-lg p-8 rounded-lg shadow-md mt-12">
               <h2 className="text-3xl font-bold text-deep-blue mb-4">The Best Home Security Company in the Midwest</h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 When the safety of your family and your home is on the line, why settle for anything less than the best? Alert Protective has the experience and expertise to keep you safe with home alarm systems designed for your unique needs. Call us today for a free security system quote. With our competitive rates, you can't afford not to.

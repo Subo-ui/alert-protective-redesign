@@ -1,5 +1,7 @@
+// src/components/IconFeatureGrid.tsx (Enhanced Version)
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
+import ScrollFloat from './ScrollFloat';
 import {
     DevicePhoneMobileIcon,
     FireIcon,
@@ -13,20 +15,25 @@ interface GridFeatureProps {
     icon: React.ElementType;
     title: string;
     description: string;
-    delay: number;
-    inView: boolean;
+    index: number;
 }
 
-const GridFeature: React.FC<GridFeatureProps> = ({ icon: Icon, title, description, delay, inView }) => (
-    <div className={`p-6 bg-white rounded-xl shadow-soft transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${delay}ms`}}>
+const GridFeature: React.FC<GridFeatureProps> = ({ icon: Icon, title, description, index }) => (
+    <ScrollFloat 
+        animationDuration={1.2}
+        ease="back.out(1.7)"
+        y={60}
+        scale={true}
+        stagger={index * 0.1}
+        className="p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-soft"
+    >
         <div className="flex items-center justify-center h-16 w-16 rounded-full bg-deep-red text-white mb-4">
             <Icon className="h-8 w-8" />
         </div>
         <h3 className="text-xl font-bold text-navy">{title}</h3>
         <p className="mt-2 text-gray-600">{description}</p>
-    </div>
+    </ScrollFloat>
 );
-
 
 const IconFeatureGrid: React.FC = () => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -41,12 +48,17 @@ const IconFeatureGrid: React.FC = () => {
     ];
 
     return (
-        <section ref={ref} className="bg-white py-20">
+        <section ref={ref} className="py-20">
             <div className="container mx-auto px-6">
-                <div className="text-center mb-12">
+                <ScrollFloat 
+                    animationDuration={1.8}
+                    ease="power2.out"
+                    y={40}
+                    className="text-center mb-12"
+                >
                     <h2 className="text-3xl font-extrabold text-navy sm:text-4xl">Complete Protection For Home & Business</h2>
                     <p className="mt-4 text-lg text-gray-600">We offer a full suite of services to ensure your total safety and peace of mind.</p>
-                </div>
+                </ScrollFloat>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {features.map((feature, index) => (
                         <GridFeature 
@@ -54,8 +66,7 @@ const IconFeatureGrid: React.FC = () => {
                             icon={feature.icon} 
                             title={feature.title} 
                             description={feature.description}
-                            delay={index * 100}
-                            inView={inView}
+                            index={index}
                         />
                     ))}
                 </div>
@@ -64,4 +75,4 @@ const IconFeatureGrid: React.FC = () => {
     );
 };
 
-export default IconFeatureGrid; 
+export default IconFeatureGrid;
