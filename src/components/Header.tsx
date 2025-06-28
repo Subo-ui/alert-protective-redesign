@@ -74,6 +74,18 @@ const Header: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Prevent background scrolling when mobile nav is open
+    useEffect(() => {
+        if (mobileNavOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [mobileNavOpen]);
+
     const homeServices: NavItem[] = [
         { name: 'Alarm System', icon: ComputerDesktopIcon, link: '/home-services/alarm-system' },
         { name: 'Home Automation', icon: HomeIcon, link: '/home-services/home-automation' },
@@ -156,13 +168,16 @@ const Header: React.FC = () => {
                 {/* Mobile Navigation Drawer */}
                 {mobileNavOpen && (
                     <div className="sm:hidden fixed inset-0 bg-black bg-opacity-40 z-50" onClick={() => setMobileNavOpen(false)}>
-                        <div className="fixed top-0 left-0 w-4/5 max-w-xs h-full bg-white shadow-lg z-50 p-6 flex flex-col gap-6" onClick={e => e.stopPropagation()}>
+                        <div
+                            className="fixed top-0 left-0 w-full max-w-none h-full shadow-lg z-50 p-6 flex flex-col gap-6 border-r border-gray-200 bg-white/95 backdrop-blur-lg"
+                            onClick={e => e.stopPropagation()}
+                        >
                             <button className="self-end mb-4" onClick={() => setMobileNavOpen(false)} aria-label="Close menu">
                                 <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
-                            <div className="flex flex-col gap-4 font-medium text-gray-700">
+                            <div className="bg-white/90 rounded-xl shadow-lg p-4 flex flex-col gap-4 font-medium text-gray-700 backdrop-blur-md">
                                 <span className="text-xs text-gray-400 uppercase">Home Services</span>
                                 {homeServices.map(item => (
                                     <Link key={item.name} to={item.link} className="flex items-center py-2" onClick={() => setMobileNavOpen(false)}>
